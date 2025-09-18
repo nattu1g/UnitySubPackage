@@ -1,21 +1,12 @@
 {
-    "name": "Common.Vcontainer",
-    "rootNamespace": "Common.Vcontainer",
+    "name": "Common.Events",
+    "rootNamespace": "Common.Events",
     "references": [
-        "VContainer",
-        "AudioConductor",
-        "UniTask",
-        "Unity.TextMeshPro",
-        "UniTask.TextMeshPro",
         "Alchemy",
-        "MessagePipe",
-        "MessagePipe.VContainer",
         "LitMotion",
         "LitMotion.Extensions",
-        "Common.Features",
-        "Common.Settings",
-        "Common.UIs",
-        "Common.Events"
+        "Unity.TextMeshPro",
+        "UniTask.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

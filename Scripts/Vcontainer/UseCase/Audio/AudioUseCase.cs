@@ -3,12 +3,14 @@ using Common.Features;
 using Common.Vcontainer.Entity;
 using Cysharp.Threading.Tasks;
 using R3;
+using UnityEngine;
 
 namespace Common.Vcontainer.UseCase.Audio
 {
     public class AudioUseCase : IDisposable
     {
         readonly VolumeEntity _volumeEntity;
+        readonly AudioEntity _audioEntity;
         readonly ComponentAssembly _componentAssembly;
 
         public ReadOnlyReactiveProperty<float> BgmVolume { get; }
@@ -18,9 +20,11 @@ namespace Common.Vcontainer.UseCase.Audio
 
         public AudioUseCase(
             VolumeEntity volumeEntity,
+            AudioEntity audioEntity,
             ComponentAssembly componentAssembly)
         {
             _volumeEntity = volumeEntity;
+            _audioEntity = audioEntity;
             _componentAssembly = componentAssembly;
 
             BgmVolume = _volumeEntity.BgmVolume.ToReadOnlyReactiveProperty(0f).AddTo(_disposables);
@@ -49,6 +53,10 @@ namespace Common.Vcontainer.UseCase.Audio
         {
             var currentVolume = (int)this.SeVolume.CurrentValue;
             await _volumeEntity.SetSEVolume(currentVolume - _volumeEntity.VolumeIncrement, _componentAssembly.AudioMixer);
+        }
+        public async UniTask PlayUISound(string soundName)
+        {
+            await _audioEntity.PlaySE(soundName);
         }
 
         public void Dispose()
